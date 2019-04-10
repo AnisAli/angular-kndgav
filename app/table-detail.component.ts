@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, Input, ViewChild, AfterViewInit,ngOnChanges} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
@@ -12,11 +12,11 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
   styleUrls: ['table-detail.component.css'],
   templateUrl: 'table-detail.component.html',
 })
-export class TableDetailComponent implements AfterViewInit {
+export class TableDetailComponent implements ngOnChanges  {
   displayedColumns: string[] = ['created', 'state', 'number', 'title'];
   exampleDatabase: ExampleHttpDatabase | null;
   data: GithubIssue[] = [];
-
+  @Input() isLoad:boolean = false;
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -26,13 +26,13 @@ export class TableDetailComponent implements AfterViewInit {
 
   constructor(private http: HttpClient) {}
 
-  ngAfterViewInit() {
+  ngOnChanges() {
     this.exampleDatabase = new ExampleHttpDatabase(this.http);
 
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    merge(this.sort.sortChange, this.paginator.page)
+    if(this.isLoad) {
+       merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -55,6 +55,8 @@ export class TableDetailComponent implements AfterViewInit {
           return observableOf([]);
         })
       ).subscribe(data => this.data = data);
+    }
+   
   }
 }
 
