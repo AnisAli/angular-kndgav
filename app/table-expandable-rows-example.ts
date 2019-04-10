@@ -20,6 +20,22 @@ export class TableExpandableRowsExample {
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: PeriodicElement | null;
+  expandedElementList:PeriodicElement[] = [] ;
+
+  isExpanded(element:PeriodicElement){
+    let index =this.expandedElementList.findIndex(c=>c.name == element.name);
+    return index > 0;
+  }
+
+  toggle(element) {
+    let index =this.expandedElementList.findIndex(c=>c.name == element.name);
+    if(index > 0) { //found to delete
+      this.expandedElementList.splice(index,1);
+    } else{
+      this.expandedElementList.push(element);
+    }
+  }
+
 }
 
 export interface PeriodicElement {
