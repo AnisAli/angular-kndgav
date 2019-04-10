@@ -11,7 +11,7 @@
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
       <div class="example-element-detail"
            [@detailExpand]="isExpanded(element) ? 'expanded' : 'collapsed'">
-           <app-detail [element]="element.name"></app-detail>
+           <app-detail></app-detail>
         <!-- <div class="example-element-diagram">
           <div class="example-element-position"> {{element.position}} </div>
           <div class="example-element-symbol"> {{element.symbol}} </div>
