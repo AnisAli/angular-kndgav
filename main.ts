@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './material-module';
 
 import {TableExpandableRowsExample} from './app/table-expandable-rows-example';
+import {TableDetailComponent} from './app/table-detail.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import {TableExpandableRowsExample} from './app/table-expandable-rows-example';
     ReactiveFormsModule,
   ],
   entryComponents: [TableExpandableRowsExample],
-  declarations: [TableExpandableRowsExample],
+  declarations: [TableExpandableRowsExample,TableDetailComponent],
   bootstrap: [TableExpandableRowsExample],
   providers: []
 })

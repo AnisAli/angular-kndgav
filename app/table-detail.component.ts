@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,Input} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 /**
@@ -9,5 +9,5 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   templateUrl: 'table-detail.component.html'
 })
 export class TableDetailComponent {
-    
+    @Input() element:any;
 }
